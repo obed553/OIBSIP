@@ -1,49 +1,34 @@
 import java.util.Scanner;
 
-public class NumberGuessing {
-    // Function that implements the number guessing game
-    public static void guessingNumberGame() {
-        // Scanner Class
+public class BinarySearchNumberGuessing {
+    public static void Guessingnumbergame() {
         Scanner sc = new Scanner(System.in);
-        
-        int lowerBound = 1;
-        int upperBound = 100;
-        int targetNumber = (int) (Math.random() * 100) + 1; // Generate the target number
-        int guess;
-        int trials = 0;
-        
+        int low = 1;
+        int high = 100;
+        int count = 0;
         System.out.println("A number is chosen between 1 to 100.\n" + "Guess the number.");
-
-        // Binary search-based guessing loop
-        while (true) {
-            guess = (lowerBound + upperBound) / 2; // Guess the middle number
-            trials++;
-
-            System.out.println("Is the number " + guess + "? (Enter '1' for correct, '-1' for too high, '0' for too low):");
-            int response = sc.nextInt();
-
-            if (response == 1) {
-                System.out.println("Congratulations! You guessed the number.");
+        while (low <= high) {
+            int mid = low + (high - low) / 2; // Use binary search midpoint formula
+            count++;
+            System.out.println("Is the number " + mid + "? (Enter '1' for correct, '-1' for  high, '0' for low):");
+            int n = sc.nextInt();
+            if (n == 1) {
+                System.out.println("Congratulations! your guess is correct.");
                 break;
-            } else if (response == -1) {
-                upperBound = guess - 1; // Adjust the upper bound
+            } else if (n == -1) {
+                high = mid - 1;
             } else {
-                lowerBound = guess + 1; // Adjust the lower bound
-            }
-
-            if (lowerBound > upperBound) {
-                System.out.println("You have exhausted all trials.");
-                System.out.println("The number was " + targetNumber);
-                break;
+                low = mid + 1;
             }
         }
-        
-        System.out.println("Number of trials: " + trials);
-    }
+        if (low > high) {
+            System.out.println("You have exhausted all trials.");
+            System.out.println("The number was " + count);
+        }
 
-    // Driver Code
+        System.out.println("Number of trials: " + count);
+    }
     public static void main(String[] args) {
-        // Function Call
-        guessingNumberGame();
+        Guessingnumbergame();
     }
 }
