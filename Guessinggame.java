@@ -1,35 +1,49 @@
 import java.util.Scanner;
 
-public class guessingGame {
-    public static void main(String[] args) {
-        int computeNumber = (int) (Math.random() * 100 + 1);
-        int userAnswer = 0;
-        int count = 1;
+public class NumberGuessing {
+    // Function that implements the number guessing game
+    public static void guessingNumberGame() {
+        // Scanner Class
+        Scanner sc = new Scanner(System.in);
         
-        try (Scanner scanner = new Scanner(System.in)) {
-            while (userAnswer != computeNumber) {
-                System.out.print("Enter a guess between 1 and 100: ");
-                userAnswer = scanner.nextInt();
-                System.out.println(determineGuess(userAnswer, computeNumber, count));
-                count++;
+        int lowerBound = 1;
+        int upperBound = 100;
+        int targetNumber = (int) (Math.random() * 100) + 1; // Generate the target number
+        int guess;
+        int trials = 0;
+        
+        System.out.println("A number is chosen between 1 to 100.\n" + "Guess the number.");
+
+        // Binary search-based guessing loop
+        while (true) {
+            guess = (lowerBound + upperBound) / 2; // Guess the middle number
+            trials++;
+
+            System.out.println("Is the number " + guess + "? (Enter '1' for correct, '-1' for too high, '0' for too low):");
+            int response = sc.nextInt();
+
+            if (response == 1) {
+                System.out.println("Congratulations! You guessed the number.");
+                break;
+            } else if (response == -1) {
+                upperBound = guess - 1; // Adjust the upper bound
+            } else {
+                lowerBound = guess + 1; // Adjust the lower bound
             }
-        } catch (Exception e) {
-            // TODO: handle exception
+
+            if (lowerBound > upperBound) {
+                System.out.println("You have exhausted all trials.");
+                System.out.println("The number was " + targetNumber);
+                break;
+            }
         }
+        
+        System.out.println("Number of trials: " + trials);
     }
 
-    // Method to determine the guess result
-    public static String determineGuess(int userAnswer , int computeNumber , int count) {
-        if (userAnswer <= 0 || userAnswer > 100) {
-            return "Your guess is invalid";
-        } else if (userAnswer == computeNumber) {
-            return "Correct! \nTotal Guesses: " + count;
-        } else if (userAnswer > computeNumber) {
-            return "Your guess is too high, try again. \nTry Number: " + count;
-        } else if (userAnswer < computeNumber) {
-            return "Your guess is too low, try again. \nTry Number: " + count;
-        } else {
-            return "Your guess is incorrect. \nTry Number: " + count;
-        }
+    // Driver Code
+    public static void main(String[] args) {
+        // Function Call
+        guessingNumberGame();
     }
 }
