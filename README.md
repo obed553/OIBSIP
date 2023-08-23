@@ -3,6 +3,8 @@ I am  a passionate individual looking to explore the realms of Java programming 
 
  We at Oasis InfoByters, we are more than just a technology company; we are a community of innovators, creators, and problem solvers. With a rich history of delivering cutting-edge software solutions, we are excited to open our doors to aspiring Java developers through our dynamic internship program.
 
-TASK 2 :- NUMBER GUESSING GAME
 
+TASKS TO SOLVE:
+TASK 2 :- NUMBER GUESSING GAME
+TASK 3 :- ATM INTERFACE
 
